@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aryan Pandey Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e0243a;--red2:#9e1424;--gold:#f4b942;--bg:#141414;--card:#181818;--muted:#a3a3a3;--green:#46d369}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
+
+/* ---------- 1. start gate ---------- */
+#gate{position:fixed;inset:0;display:grid;place-items:center;background:#000;z-index:50;cursor:pointer}
+#gate .word{font-family:'Bebas Neue';font-size:clamp(70px,16vw,190px);letter-spacing:.02em;color:var(--red);
+  text-shadow:0 6px 0 #5c0207,0 0 40px rgba(229,9,20,.35);opacity:.9}
+#gate p{position:absolute;bottom:14%;width:100%;text-align:center;color:#bbb;font-size:15px;letter-spacing:.3em;text-transform:uppercase;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+
+/* ---------- 2. ta-dum intro ---------- */
+#intro{position:fixed;inset:0;background:#000;z-index:49;overflow:hidden;display:grid;place-items:center}
+#intro .logo{font-family:'Bebas Neue';font-size:clamp(80px,19vw,240px);line-height:1;color:var(--red);position:relative;
+  text-shadow:0 8px 0 #5c0207,0 0 60px rgba(229,9,20,.5);transform-origin:31% 52%;
+  animation:logoIn 3.4s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes logoIn{
+  0%{transform:scale(.55);opacity:0;filter:blur(8px)}
+  12%{opacity:1;filter:blur(0)}
+  45%{transform:scale(1)}
+  62%{transform:scale(1.08)}
+  100%{transform:scale(60);opacity:1}}
+#intro .stripes{position:absolute;inset:0;display:flex;opacity:0;animation:stripes 3.4s forwards}
+#intro .stripes i{flex:1;transform:scaleY(0);transform-origin:top;animation:drop 1.1s cubic-bezier(.7,0,.3,1) forwards}
+@keyframes stripes{0%,58%{opacity:0}62%{opacity:1}92%{opacity:1}100%{opacity:0}}
+@keyframes drop{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1) translateY(102%)}}
+#intro .flash{position:absolute;inset:0;background:radial-gradient(circle,#ff4b55 0,transparent 60%);opacity:0;animation:flash 3.4s forwards}
+@keyframes flash{0%,40%{opacity:0}46%{opacity:.35}60%{opacity:0}}
+#skip{position:fixed;right:28px;bottom:28px;z-index:60;border:1px solid #888;padding:8px 18px;border-radius:4px;color:#ddd;font-size:14px;background:rgba(0,0,0,.4)}
+#skip:hover{background:#fff;color:#000}
+
+/* ---------- 3. who's watching ---------- */
+#profiles{position:fixed;inset:0;background:var(--bg);z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;animation:fadeIn .8s}
+@keyframes fadeIn{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
+#profiles h1{font-weight:500;font-size:clamp(28px,4.5vw,56px)}
+.plist{display:flex;gap:clamp(14px,2.5vw,32px);flex-wrap:wrap;justify-content:center;padding:0 16px}
+.pf{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted);transition:color .2s}
+.pf .av{width:clamp(96px,11vw,150px);aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;outline:3px solid transparent;transition:outline-color .2s,transform .25s}
+.pf:hover,.pf:focus-visible{color:#fff;outline:none}
+.pf:hover .av,.pf:focus-visible .av{outline-color:#fff;transform:scale(1.06)}
+.pf span{font-size:clamp(13px,1.3vw,18px)}
+.av img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.05)}
+.av .tint{position:absolute;inset:0;mix-blend-mode:color;opacity:.55}
+.av .face{position:absolute;inset:0;display:grid;place-items:center}
+#profiles .manage{border:1px solid #777;color:#888;padding:8px 22px;letter-spacing:.2em;font-size:13px;text-transform:uppercase}
+
+/* ---------- 4. browse ---------- */
+#browse{background:var(--bg);min-height:100vh;animation:fadeIn .7s}
+nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;gap:30px;padding:16px 4%;
+  background:linear-gradient(#000c,transparent);transition:background .35s}
+nav.solid{background:#141414}
+nav .brand{font-family:'Bebas Neue';font-size:34px;color:var(--red);letter-spacing:.02em;text-shadow:0 2px 0 #5c0207}
+nav .links{display:flex;gap:20px;font-size:14px}
+nav .links a{color:#e5e5e5;transition:color .2s}nav .links a:hover{color:#b3b3b3}
+nav .links a.on{font-weight:700;color:#fff}
+nav .right{margin-left:auto;display:flex;align-items:center;gap:18px;font-size:14px}
+nav .me{width:34px;height:34px;border-radius:4px;overflow:hidden;position:relative}
+@media(max-width:760px){nav .links a:not(.on){display:none}nav{gap:14px}}
+
+.hero{position:relative;height:min(95vh,880px);min-height:560px;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 45%,#7a1c22 0,#3a0c10 55%,#140507 100%)}
+.hero .photo{position:absolute;right:0;top:0;height:100%;width:min(64%,980px);background:url(img/hero.jpg) 50% 28%/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%);animation:ken 24s ease-in-out infinite alternate}
+@keyframes ken{from{transform:scale(1)}to{transform:scale(1.08) translateX(-1.5%)}}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,#000e 0,#000a 28%,transparent 62%),linear-gradient(0deg,var(--bg) 2%,transparent 30%)}
+.hero .info{position:absolute;left:4%;bottom:26%;max-width:min(620px,92%);animation:rise 1s .2s both}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.kicker{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.35em;font-size:13px;color:#ddd}
+.kicker b{font-family:'Bebas Neue';font-size:30px;color:var(--gold);letter-spacing:0}
+.hero h2{font-family:'Bebas Neue';font-size:clamp(64px,10vw,140px);line-height:.88;margin:6px 0 14px;letter-spacing:.01em;text-shadow:0 4px 30px #000}
+.top10{display:flex;align-items:center;gap:10px;font-weight:700;font-size:clamp(15px,1.6vw,22px);margin-bottom:12px}
+.top10 .badge{background:var(--red);font-size:10px;line-height:1;padding:5px 4px;border-radius:2px;text-align:center;font-weight:900}
+.top10 .badge big{display:block;font-size:17px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;color:#ddd;font-size:15px;margin-bottom:14px}
+.meta .chip{color:var(--gold);font-weight:700}
+.meta .box{border:1px solid #aaa;padding:0 6px;font-size:12px}
+.hero p.desc{font-size:clamp(15px,1.4vw,19px);line-height:1.45;text-shadow:0 2px 8px #000;margin-bottom:22px;color:#eee}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:11px 26px;border-radius:4px;font-weight:700;font-size:18px;transition:background .2s,transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.play{background:#fff;color:#000}.btn.play:hover{background:#ffffffbf}
+.btn.more{background:#6d6d6eb3;color:#fff}.btn.more:hover{background:#6d6d6e66}
+.btn svg{width:22px;height:22px}
+.hero .age{position:absolute;right:0;bottom:30%;background:#3339;border-left:3px solid #ddd;padding:6px 40px 6px 12px;font-size:15px}
+
+/* rows */
+.rows{position:relative;margin-top:-9vw;z-index:2;padding-bottom:60px}
+.row{margin:0 0 3.2vw}
+.row h3{font-size:clamp(16px,1.5vw,22px);font-weight:700;margin:0 4% 10px;color:#e5e5e5}
+.slider{display:flex;gap:8px;overflow-x:auto;overflow-y:visible;padding:14px 4% 70px;margin-bottom:-56px;scroll-behavior:smooth;scrollbar-width:none}
+.slider::-webkit-scrollbar{display:none}
+.card{flex:0 0 clamp(220px,21vw,320px);aspect-ratio:16/9;border-radius:5px;position:relative;cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;transform-origin:center 30%}
+.card .art{position:absolute;inset:0;border-radius:5px;overflow:hidden}
+.card .pop{position:absolute;left:0;right:0;top:100%;background:var(--card);border-radius:0 0 6px 6px;padding:12px 14px 14px;opacity:0;pointer-events:none;transition:opacity .25s;box-shadow:0 14px 24px #000a}
+.card:hover,.card:focus-visible{transform:scale(1.32) translateY(-14%);z-index:5;box-shadow:0 10px 30px #000c;outline:none}
+.card:hover .art,.card:focus-visible .art{border-radius:6px 6px 0 0}
+.card:hover .pop,.card:focus-visible .pop{opacity:1;pointer-events:auto}
+.slider .card:first-child:hover{transform-origin:left 30%}
+.pop .ic{display:flex;gap:7px;margin-bottom:9px}
+.pop .ic span{width:28px;height:28px;border-radius:50%;border:2px solid #888;display:grid;place-items:center;font-size:12px}
+.pop .ic span.w{background:#fff;color:#000;border-color:#fff}
+.pop .ic span.r{margin-left:auto}
+.pop .m{font-size:11px;display:flex;gap:7px;align-items:center;margin-bottom:6px}
+.pop .m .match{color:var(--green);font-weight:700}
+.pop .m .box{border:1px solid #888;padding:0 4px}
+.pop .tags{font-size:11px;color:#ddd}
+.pop .tags i{font-style:normal;color:#666;margin:0 4px}
+.prog{position:absolute;left:8px;right:8px;bottom:8px;height:3px;background:#5a5a5a;border-radius:2px}
+.prog b{display:block;height:100%;background:var(--red);border-radius:2px}
+/* numbered top 3 */
+.ranked .card{flex-basis:clamp(260px,25vw,380px);aspect-ratio:auto;height:clamp(150px,13vw,210px);display:flex}
+.ranked .num{flex:0 0 48%;font-family:'Bebas Neue';font-size:clamp(150px,15vw,240px);line-height:.95;color:var(--bg);-webkit-text-stroke:4px #595959;text-align:right;padding-right:4px;letter-spacing:-.06em}
+.ranked .art{position:relative;flex:1;inset:auto}
+.ranked .card:hover{transform:scale(1.08)}
+.ranked .pop{display:none}
+
+/* art */
+.art .t{position:absolute;left:12px;bottom:10px;right:12px;font-family:'Bebas Neue';font-size:clamp(24px,2.2vw,34px);line-height:.9;text-shadow:0 2px 10px #000}
+.art .n{position:absolute;left:10px;top:8px;font-family:'Bebas Neue';color:var(--gold);font-size:22px;text-shadow:0 1px 2px #000}
+.art .tag{position:absolute;right:0;top:10px;background:var(--red);font-size:10px;font-weight:700;padding:3px 7px;border-radius:2px 0 0 2px}
+.art img{width:100%;height:100%;object-fit:cover}
+
+/* about strip */
+.about{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin:0 4% 3.5vw;padding:22px;border-radius:10px;background:linear-gradient(90deg,#2a0d10,#1a1a1a 70%);border:1px solid #ffffff12}
+.about img{width:clamp(110px,12vw,160px);aspect-ratio:1;object-fit:cover;object-position:50% 20%;border-radius:50%;border:3px solid var(--gold)}
+.about h3{margin:0 0 6px;font-size:22px}
+.about p{color:#ccc;line-height:1.5;max-width:640px}
+.stats{display:flex;gap:28px;margin-top:14px;flex-wrap:wrap}
+.stats b{display:block;font-family:'Bebas Neue';font-size:38px;color:var(--gold);line-height:1}
+.stats span{font-size:12px;color:#999;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:600px){.about{grid-template-columns:1fr;text-align:center}.about img{margin:auto}.stats{justify-content:center}}
+.pop .acts{display:flex;gap:8px;margin-bottom:9px}
+.pop .acts a,.pop .acts span{font-size:12px;font-weight:700;padding:5px 10px;border-radius:4px;background:#fff;color:#000}
+.pop .acts a+a{background:#333;color:#fff}
+.pop .m .live{color:var(--gold);font-weight:700}
+
+/* video previews */
+.art video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s;z-index:1}
+.art video.on{opacity:1}
+.art .t,.art .n,.art .tag,.art .prog{z-index:2}
+/* contact */
+.contact{margin:0 4% 3.5vw;padding:26px;border-radius:10px;background:linear-gradient(120deg,#3a0c10,#1a1a1a 65%);border:1px solid #ffffff12}
+.contact h3{font-size:24px;margin-bottom:6px}
+.contact p{color:#bbb;margin-bottom:16px}
+.cbtns{display:flex;gap:10px;flex-wrap:wrap}
+.cbtns a{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:6px;font-weight:700;font-size:15px;background:#ffffff14;border:1px solid #ffffff22;transition:background .2s,transform .15s}
+.cbtns a:hover{background:#ffffff26;transform:translateY(-2px)}
+.cbtns a.dl{background:var(--gold);color:#1a0a00;border-color:var(--gold)}
+.cbtns svg{width:18px;height:18px}
+
+/* modal */
+#modal{position:fixed;inset:0;z-index:70;background:#000b;display:flex;justify-content:center;overflow-y:auto;padding:3vh 12px;animation:fadeIn2 .25s}
+@keyframes fadeIn2{from{opacity:0}}
+#modal .box{width:min(860px,100%);background:var(--card);border-radius:8px;overflow:hidden;align-self:flex-start;animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+#modal .head{position:relative;aspect-ratio:16/8}
+#modal .head .art{position:absolute;inset:0}
+#modal .head::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--card),transparent 55%)}
+#modal .head .over{position:absolute;left:5%;bottom:8%;z-index:2}
+#modal .head h4{font-family:'Bebas Neue';font-size:clamp(40px,6vw,72px);line-height:.9;margin-bottom:16px}
+#modal .x{position:absolute;right:14px;top:14px;z-index:3;width:38px;height:38px;border-radius:50%;background:#181818;font-size:20px}
+#modal .body{display:grid;grid-template-columns:2fr 1fr;gap:28px;padding:10px 5% 40px}
+#modal .body p{line-height:1.55;color:#e5e5e5;margin-bottom:14px}
+#modal ul{padding-left:18px;line-height:1.6;color:#ddd}
+#modal .side{font-size:14px;color:#ddd;line-height:1.7}
+#modal .side em{color:#777;font-style:normal}
+@media(max-width:640px){#modal .body{grid-template-columns:1fr}}
+
+footer{padding:40px 4% 60px;color:#808080;font-size:13px;max-width:980px;line-height:1.9}
+footer .soc{display:flex;gap:14px;margin-bottom:14px}
+footer .soc a{color:#ddd;border:1px solid #444;padding:6px 14px;border-radius:4px}
+footer .soc a:hover{border-color:#fff}
+</style>
+</head>
+<body>
+
+<div id="gate" role="button" tabindex="0" aria-label="Start">
+  <div class="word">ARYAN</div>
+  <p>Click to enter · sound on 🔊</p>
+</div>
+
+<div id="intro" class="hidden" aria-hidden="true">
+  <div class="logo">ARYAN</div>
+  <div class="stripes"></div>
+  <div class="flash"></div>
+</div>
+<button id="skip" class="hidden">Skip intro</button>
+
+<section id="profiles" class="hidden">
+  <h1>Who's visiting?</h1>
+  <div class="plist"></div>
+  <p style="color:#777;font-size:14px">Pick one and the page rearranges for you</p>
+</section>
+
+<main id="browse" class="hidden">
+  <nav id="nav">
+    <a class="brand" href="#" onclick="toProfiles();return false">ARYAN</a>
+    <div class="links">
+      <a href="#top" class="on">Home</a><a href="#row-projects">Projects</a><a href="#row-skills">Skills</a><a href="#row-learning">Now learning</a><a href="#contact-box">Contact</a>
+    </div>
+    <div class="right"><a class="navdl" href="Aryan_Pandey_Resume.pdf" download style="border:1px solid var(--gold);color:var(--gold);padding:5px 12px;border-radius:4px;font-weight:700;font-size:13px">⬇ Resume</a><span id="who"></span><button class="me" id="me" title="Switch profile" onclick="toProfiles()"></button></div>
+  </nav>
+  <section class="hero" id="top">
+    <div class="bg"></div><div class="photo"></div><div class="shade"></div>
+    <div class="info" id="heroInfo"></div>
+  </section>
+  <div class="rows" id="rows"></div>
+  <footer id="contact">
+    Aryan Pandey · B.Tech CSE, Newton School of Technology, Bengaluru · Open to 2027 internships<br>
+    Designed and built by Aryan.
+  </footer>
+</main>
+
+<div id="modal" class="hidden"></div>
+
+<script>
+/* ===== your photo: put photo.jpg next to this file ===== */
+const IMG = { recruiter:'img/recruiter.jpg', developer:'img/developer.jpg', friend:'img/friend.jpg', about:'img/about.jpg' };
+
+const projects = [
+  { id:'tuning', title:'Tuning Cost Estimator', year:'2026', match:98, status:'Deploying now', tag:'NEW',
+    genres:['Full-stack','Automotive','Data'], stack:['Python','FastAPI','React','Tailwind CSS','PostgreSQL (Supabase)','GitHub Actions'],
+    pitch:'Pick any car or bike sold in India and see what each tuning stage costs, how much power it adds, and how it sounds.',
+    points:['Engine-aware pricing for 312 vehicles, with city labour rates and GST.','Budget planner that finds the most power for your money.','Accounts with hashed passwords, signed tokens and a personal garage.','40+ automated tests, a dyno chart and Web Audio engine sounds.'],
+    links:[['GitHub','https://github.com/NSTAryanPandey/tuning-cost-estimator']],
+    art:'linear-gradient(135deg,#1a0000 0%,#5c0207 45%,#e50914 100%)', motif:'speed', progress:85, video:'video/tuning.mp4' },
+  { id:'archviz', title:'ArchViz Luxury Studio', year:'2026', match:96, status:'Live', tag:'LIVE',
+    genres:['3D','Multiplayer','Design'], stack:['JavaScript','three.js','Node.js','Socket.IO','MongoDB'],
+    pitch:'Friends open one link and furnish the same 3D house together, live, on a laptop or a 3 GB phone.',
+    points:['Real-time rooms over WebSockets: everyone sees each placement instantly.','The server checks every move and saves rooms to MongoDB.','A Lite mode keeps it smooth on low-end phones.'],
+    links:[['Play','https://archviz-studio.onrender.com'],['GitHub','https://github.com/NSTAryanPandey/archviz-studio']],
+    art:'linear-gradient(160deg,#2b1a0c 0%,#8a5a22 55%,#f2c46d 100%)', motif:'house', progress:100, video:'video/archviz.mp4' },
+  { id:'prayagraj', title:'Prayagraj Open World', year:'2026', match:94, status:'Live', tag:'LIVE',
+    genres:['Game','Open world','Maps'], stack:['JavaScript','three.js','Node.js','Socket.IO','OpenStreetMap','Mapbox'],
+    pitch:'An open-world driving game built from the real roads, buildings and rivers of Prayagraj.',
+    points:['Builds the city from OpenStreetMap data with satellite imagery.','The server caches a compressed map so players load a small file.','Multiplayer driving, missions and an in-game phone.'],
+    links:[['Play','https://prayagraj-open-world.onrender.com'],['GitHub','https://github.com/NSTAryanPandey/prayagraj-open-world']],
+    art:'linear-gradient(180deg,#ff8a3d 0%,#c2410c 40%,#0f3b4a 75%,#06222b 100%)', motif:'city', progress:100, video:'video/prayagraj.mp4' },
+];
+const skills = [
+  { id:'fe', title:'Frontend', genres:['React','Tailwind','three.js'], pitch:'React, Tailwind CSS, Vite, three.js, Web Audio.', points:['Component UIs in React with Tailwind','Real-time 3D scenes in three.js','Generated sound and SVG graphics'], art:'linear-gradient(135deg,#0b3d91,#1e88e5)', motif:'code' },
+  { id:'be', title:'Backend', genres:['FastAPI','Node','REST'], pitch:'FastAPI, Node.js, Express, Socket.IO, REST APIs.', points:['REST APIs in FastAPI and Express','WebSocket multiplayer with Socket.IO','Authentication and rate limiting'], art:'linear-gradient(135deg,#0f5132,#20c997)', motif:'code' },
+  { id:'db', title:'Databases', genres:['PostgreSQL','MongoDB','SQL'], pitch:'PostgreSQL (Supabase), MongoDB and SQL.', points:['Schema design with constraints and row-level security','Caching large map data in MongoDB'], art:'linear-gradient(135deg,#3b0764,#9333ea)', motif:'code' },
+  { id:'eng', title:'Git & DevOps', genres:['GitHub Actions','pytest','Render'], pitch:'Git, GitHub Actions, pytest, Render, Vercel.', points:['Automated tests on every push','Deploying full-stack apps on free tiers'], art:'linear-gradient(135deg,#1f2937,#6b7280)', motif:'code' },
+  { id:'ai', title:'AI Tools', genres:['AI-assisted dev','Prompting'], pitch:'AI-assisted development and prompt design.', points:['Builds quickly with AI coding assistants','Reviews and understands what it ships'], art:'linear-gradient(135deg,#7c2d12,#f97316)', motif:'code' },
+];
+const learning = [
+  { id:'dsa', title:'Data Structures', genres:['Daily practice'], pitch:'Daily problem practice.', points:['Arrays, hashing, recursion and graphs'], art:'linear-gradient(135deg,#111827,#374151)', motif:'code', progress:30 },
+  { id:'oss', title:'Open Source', genres:['GSoC 2027'], pitch:'Working toward Google Summer of Code 2027.', points:['First contributions to open-source projects'], art:'linear-gradient(135deg,#052e16,#16a34a)', motif:'code', progress:15 },
+  { id:'cs', title:'CS Fundamentals', genres:['OS','Networks'], pitch:'OS, networks and the command line.', points:['System and AI Essentials course, 1st semester'], art:'linear-gradient(135deg,#172554,#2563eb)', motif:'code', progress:45 },
+];
+const all = [...projects, ...skills, ...learning];
+
+const PROFILES = {
+  recruiter:{ name:'Recruiter', color:'#e50914', face:'#e50914', feature:'tuning', order:['about','projects','skills','learning'],
+    line:'First-year CSE student at NST Bengaluru who ships full-stack apps: live multiplayer 3D games and a tuning cost estimator backed by tests and a real database.' },
+  developer:{ name:'Developer', color:'#2563eb', face:'#2563eb', feature:'archviz', order:['projects','skills','about','learning'],
+    line:'FastAPI, React, three.js and Socket.IO. I like real-time systems, clean APIs and making things run on a 3 GB phone.' },
+  friend:{ name:'Friend', color:'#f5c518', face:'#e6b800', feature:'prayagraj', order:['about','learning','projects','skills'],
+    line:'I build games about places I love, like my hometown Prayagraj, and make car engines roar in the browser.' },
+};
+let current = 'recruiter';
+
+/* ---------- art ---------- */
+function motif(it){
+  if(it.motif==='speed') return `<svg viewBox="0 0 320 180" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0">
+    ${[...Array(9)].map((_,i)=>`<line x1="${-40+i*14}" y1="${30+i*15}" x2="${200+i*14}" y2="${30+i*15}" stroke="#fff" stroke-opacity="${.05+i*.02}" stroke-width="2"/>`).join('')}
+    <circle cx="250" cy="70" r="46" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="6" stroke-dasharray="4 7"/>
+    <path d="M250 70 L282 46" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>`;
+  if(it.motif==='house') return `<svg viewBox="0 0 320 180" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0">
+    <path d="M150 120 L230 60 L310 120 Z" fill="#000" fill-opacity=".25"/><rect x="170" y="118" width="120" height="70" fill="#000" fill-opacity=".3"/>
+    <rect x="195" y="135" width="26" height="22" fill="#ffe7a8" fill-opacity=".8"/><rect x="240" y="135" width="26" height="22" fill="#ffe7a8" fill-opacity=".6"/></svg>`;
+  if(it.motif==='city') return `<svg viewBox="0 0 320 180" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0">
+    <circle cx="240" cy="62" r="26" fill="#ffd27a" fill-opacity=".9"/>
+    <path d="M0 120 L30 120 L30 96 L48 96 L48 120 L80 120 L92 80 L104 120 L150 120 L150 100 L176 100 L176 120 L230 120 Q250 90 270 120 L320 120 L320 180 L0 180Z" fill="#06222b"/>
+    <path d="M0 140 Q80 130 160 142 T320 138" stroke="#7dd3fc" stroke-opacity=".35" stroke-width="3" fill="none"/></svg>`;
+  return `<svg viewBox="0 0 320 180" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;opacity:.18">
+    <text x="300" y="150" text-anchor="end" font-family="monospace" font-size="120" fill="#fff">{ }</text></svg>`;
+}
+function art(it, big){
+  return `<div class="art" style="background:${it.art}">${motif(it)}<div class="n">A</div>${it.tag&&!big?`<div class="tag">${it.tag}</div>`:''}${big?'':`<div class="t">${it.title}</div>`}${it.progress!=null&&!projects.includes(it)?`<div class="prog"><b style="width:${it.progress}%"></b></div>`:''}</div>`;
+}
+function avatar(p){
+  const P = PROFILES[p];
+  return `<img src="${IMG[p]}" alt="${P.name} profile">`;
+}
+
+/* ---------- ta-dum sound (Web Audio, made from scratch) ---------- */
+function taDum(){
+  try{
+    const ac = new (window.AudioContext||window.webkitAudioContext)();
+    const out = ac.createGain(); out.gain.value = .9; out.connect(ac.destination);
+    const comp = ac.createDynamicsCompressor(); comp.connect(out);
+    const hit = (t, f, len, vol) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type='sine'; o.frequency.setValueAtTime(f*2.2,t); o.frequency.exponentialRampToValueAtTime(f,t+.08);
+      g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(.001,t+len);
+      o.connect(g).connect(comp); o.start(t); o.stop(t+len+.05);
+      const n = ac.createBufferSource(), b = ac.createBuffer(1, ac.sampleRate*.25, ac.sampleRate), d=b.getChannelData(0);
+      for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
+      const ng = ac.createGain(), lp = ac.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=900;
+      ng.gain.value=vol*.5; n.buffer=b; n.connect(lp).connect(ng).connect(comp); n.start(t);
+    };
+    const t0 = ac.currentTime+.05;
+    hit(t0, 55, .35, .9);            // ta
+    hit(t0+.42, 45, 1.6, 1);         // dum
+    [73.4,110,146.8,185,220].forEach((f,i)=>{  // swelling chord
+      const o=ac.createOscillator(), g=ac.createGain(), lp=ac.createBiquadFilter();
+      o.type='sawtooth'; o.frequency.value=f; o.detune.value=(i%2?-7:7);
+      lp.type='lowpass'; lp.frequency.setValueAtTime(200,t0+.42); lp.frequency.exponentialRampToValueAtTime(1800,t0+1.4); lp.frequency.exponentialRampToValueAtTime(300,t0+3.2);
+      g.gain.setValueAtTime(.0001,t0+.42); g.gain.exponentialRampToValueAtTime(.09,t0+.9); g.gain.exponentialRampToValueAtTime(.0001,t0+3.4);
+      o.connect(lp).connect(g).connect(comp); o.start(t0+.42); o.stop(t0+3.5);
+    });
+  }catch(e){}
+}
+
+/* ---------- flow ---------- */
+const $ = s => document.querySelector(s);
+let introTimer;
+function startIntro(){
+  $('#gate').classList.add('hidden');
+  const intro = $('#intro'); intro.classList.remove('hidden');
+  const cols = ['#e0243a','#9e1424','#f4b942','#5c0a12','#e0243a','#ff6b6b','#7a1c22','#f4b942','#ffe3a3','#9e1424','#e0243a','#2a0508'];
+  intro.querySelector('.stripes').innerHTML = cols.map((c,i)=>`<i style="background:${c};animation-delay:${2.05+i*.03+(i%3)*.04}s"></i>`).join('');
+  $('#skip').classList.remove('hidden');
+  taDum();
+  introTimer = setTimeout(toProfiles, 3500);
+}
+function toProfiles(){
+  clearTimeout(introTimer);
+  ['#intro','#skip','#browse','#gate'].forEach(s=>$(s).classList.add('hidden'));
+  closeModal();
+  const p = $('#profiles'); p.classList.remove('hidden');
+  p.querySelector('.plist').innerHTML = Object.keys(PROFILES).map(k=>
+    `<button class="pf" data-p="${k}"><div class="av">${avatar(k)}</div><span>${PROFILES[k].name}</span></button>`).join('');
+  p.querySelectorAll('.pf').forEach(b=>b.onclick=()=>browse(b.dataset.p));
+  window.scrollTo(0,0);
+}
+function browse(p){
+  current = p; const P = PROFILES[p], f = projects.find(x=>x.id===P.feature);
+  $('#profiles').classList.add('hidden'); $('#browse').classList.remove('hidden');
+  $('#me').innerHTML = `<div class="av" style="width:100%;height:100%;position:relative">${avatar(p)}</div>`;
+  $('#who').textContent = P.name;
+  $('#heroInfo').innerHTML = `
+    <div class="kicker"><b>A</b>P O R T F O L I O</div>
+    <h2>Aryan<br>Pandey</h2>
+    <div class="meta"><span class="chip">● Open to 2027 internships</span><span>B.Tech CSE</span><span class="box">NST Bengaluru</span><span>Full-stack · 3D · Games</span></div>
+    <p class="desc">${P.line}</p>
+    <div class="btns">
+      <a class="btn play" href="${(f.links.find(l=>l[0]==='Play')||f.links[0])[1]}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z" fill="currentColor"/></svg>Play ${f.title.split(' ')[0]}</a>
+      <button class="btn more" onclick="openModal('about')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>More Info</button>
+    </div>`;
+  const rowsHtml = {
+    about: `<section class="about"><img src="${IMG.about}" alt="Aryan Pandey">
+      <div><h3>Hi, I'm Aryan 👋</h3><p>1st-year B.Tech CSE student at Newton School of Technology, Bengaluru. I learn by building things people can actually open and use.</p>
+      <div class="stats"><div><b>3</b><span>Projects shipped</span></div><div><b>2</b><span>Live multiplayer games</span></div><div><b>312</b><span>Vehicles priced</span></div><div><b>40+</b><span>Automated tests</span></div></div></div></section>`,
+    projects: row('row-projects', current==='recruiter' ? 'Featured builds' : 'Projects', [...projects].sort((a,b)=>a.id===P.feature?-1:b.id===P.feature?1:0)),
+    skills: row('row-skills', 'Tech stack', skills),
+    learning: row('row-learning', 'Currently learning', learning),
+    contact: `<section class="contact" id="contact-box"><h3>Let's work together</h3><p>Looking for 2027 software internships. Email is the fastest way to reach me.</p>
+      <div class="cbtns">
+        <a class="dl" href="Aryan_Pandey_Resume.pdf" download><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download resume</a>
+        <a href="mailto:viparyanpandey@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>viparyanpandey@gmail.com</a>
+        <a href="https://www.linkedin.com/in/aryan-pandey-37aa03364/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor"/><path d="M8 10v7M8 7v.5M12 17v-4a2 2 0 014 0v4M12 10v7" stroke="#222" stroke-width="2.2" stroke-linecap="round"/></svg>LinkedIn</a>
+        <a href="https://github.com/NSTAryanPandey" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 011-2.7c-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 015 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 011 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg>GitHub</a>
+      </div></section>`,
+  };
+  $('#rows').innerHTML = [...P.order,'contact'].map(k=>rowsHtml[k]).join('');
+  document.querySelectorAll('.card[data-open]').forEach(c=>{
+    const it = all.find(x=>x.id===c.dataset.open);
+    if(!it || !it.video) return;
+    c.addEventListener('mouseenter', () => playPreview(c.querySelector('.art'), it.video));
+    c.addEventListener('mouseleave', () => stopPreview(c.querySelector('.art')));
+  });
+  document.querySelectorAll('[data-open]').forEach(c=>{
+    c.onclick = e => { if(!e.target.closest('a')) openModal(c.dataset.open); };
+    c.onkeydown = e => { if(e.key==='Enter') openModal(c.dataset.open); };
+  });
+  window.scrollTo(0,0);
+}
+function row(id, title, items){
+  return `<div class="row" id="${id}"><h3>${title}</h3><div class="slider">${items.map(it=>`
+    <div class="card" tabindex="0" data-open="${it.id}">${art(it)}
+      <div class="pop">
+        ${it.links?`<div class="acts">${it.links.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l==='Play'?'▶ Play':l}</a>`).join('')}</div>`:''}
+        <div class="m">${it.status?`<span class="live">● ${it.status}</span>`:''}<span>${it.pitch.length>60?it.pitch.slice(0,58)+'…':it.pitch}</span></div>
+        <div class="tags">${(it.genres||[]).join('<i>•</i>')}</div>
+      </div></div>`).join('')}</div></div>`;
+}
+
+/* ---------- trailer previews ---------- */
+const missing = new Set();
+function playPreview(artEl, src){
+  if(!artEl || missing.has(src)) return;
+  let v = artEl.querySelector('video');
+  if(!v){
+    v = document.createElement('video');
+    Object.assign(v, { src, muted:true, loop:true, playsInline:true, preload:'auto' });
+    v.onerror = () => { missing.add(src); v.remove(); };
+    v.onplaying = () => v.classList.add('on');
+    artEl.prepend(v);
+  }
+  v.currentTime = 0; v.play().catch(()=>{});
+}
+function stopPreview(artEl){
+  const v = artEl && artEl.querySelector('video');
+  if(v){ v.pause(); v.classList.remove('on'); }
+}
+
+function openModal(id){
+  let it = all.find(x=>x.id===id);
+  if(id==='about') it = { title:'Aryan Pandey', art:`url(${IMG.about}) center 22%/cover`, motif:'none',
+    pitch:'1st-year B.Tech CSE student (1st semester) at Newton School of Technology, Bengaluru. I learn by building: two live multiplayer browser games and a full-stack tuning cost estimator, all on GitHub.',
+    points:['Looking for 2027 software internships','Working toward GSoC 2027 through open source','Builds with React, FastAPI, three.js, Node.js and PostgreSQL'],
+    stack:['Python','JavaScript','React','FastAPI','three.js','Node.js','PostgreSQL','MongoDB'], genres:['Student','Builder','Gamer'],
+    links:[['GitHub','https://github.com/NSTAryanPandey']] };
+  const m = $('#modal');
+  m.innerHTML = `<div class="box" role="dialog" aria-modal="true" aria-label="${it.title}">
+    <div class="head">${id==='about'?`<div class="art" style="background:${it.art}"></div>`:art(it,true)}
+      <button class="x" onclick="closeModal()" aria-label="Close">✕</button>
+      <div class="over"><h4>${it.title}</h4>${it.links?`<div class="btns">${it.links.map(([l,u],i)=>`<a class="btn ${i?'more':'play'}" href="${u}" target="_blank" rel="noopener">${i?'':'▶ '}${l}</a>`).join('')}</div>`:''}</div></div>
+    <div class="body"><div>
+      <div class="meta">${it.status?`<span class="chip">● ${it.status}</span>`:''}<span>${it.year||'2026'}</span></div>
+      <p>${it.pitch}</p><ul>${(it.points||[]).map(p=>`<li>${p}</li>`).join('')}</ul></div>
+      <div class="side">${it.stack?`<div><em>Built with: </em>${it.stack.join(', ')}</div>`:''}<div><em>Genres: </em>${(it.genres||[]).join(', ')}</div></div>
+    </div></div>`;
+  m.classList.remove('hidden'); document.body.style.overflow='hidden';
+  if(it.video) playPreview(m.querySelector('.head .art'), it.video);
+  m.onclick = e => { if(e.target===m) closeModal(); };
+}
+function closeModal(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; }
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+/* resume download: uses the Claude viewer's save prompt when hosted there, a normal link elsewhere */
+document.addEventListener('click', async e => {
+  const link = e.target.closest('a[download]');
+  if(!link || !(window.claude && window.claude.use)) return;
+  e.preventDefault();
+  try{
+    const dl = await window.claude.use('downloads');
+    if(!dl){ window.open(link.href, '_blank'); return; }
+    const blob = await (await fetch(link.getAttribute('href'))).blob();
+    await dl.save({ filename:'Aryan_Pandey_Resume.pdf', data: blob });
+  }catch(err){ if(!err || err.code!=='declined') window.open(link.href, '_blank'); }
+});
+addEventListener('scroll', () => $('#nav').classList.toggle('solid', scrollY > 60));
+$('#gate').onclick = startIntro;
+$('#gate').onkeydown = e => { if(e.key==='Enter'||e.key===' ') startIntro(); };
+$('#skip').onclick = toProfiles;
+
+</script>
+</body>
+</html>
